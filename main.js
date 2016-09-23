@@ -6,7 +6,7 @@ map = (function () {
 	// 'use strict';
 
 	// defaults
-	var map_start_location = [12.9549, 77.6056, 12]; // Bangalore
+	var map_start_location = [11.464, 78.951, 8]; // North TN
 	var style_file = 'cinnabar-style-more-labels.yaml';
 
 	/*** URL parsing ***/
