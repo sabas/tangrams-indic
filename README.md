@@ -1,5 +1,5 @@
-# Kannada Maps using Tangram 
-This is part of [State of Indian Languages on OpenStreetMaps](https://thejeshgn.com/projects/state-of-indian-languages-openstreetmap/)
+# Tamil Maps using Tangram
+[தமிழில் இணைய வரைபடம்] (blog.srik.me/2016/09/24/tamil-web-maps/)
 
 ### Screenshot
-![tangram cinnabar style](https://lib.thejeshgn.in/tangrams-kannada/tangrams-kannada-noto.png)
+![tangram cinnabar style](https://srikanthlogic.github.io/tangrams-tamil/tangrams-tamil-noto.png)
