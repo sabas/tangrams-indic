@@ -1,9 +1,9 @@
-# Cinnabar is a classic look and should be your go-to for general mapping applications. 
-# Give OpenStreetMap data a refined basemap skin using the Tangram graphics library and 
+# Cinnabar is a classic look and should be your go-to for general mapping applications.
+# Give OpenStreetMap data a refined basemap skin using the Tangram graphics library and
 # Mapzen's versatile Vector Tiles.
 #
-# This style is a High Road influenced evolution of the Traditional style Stamen created 
-# for Mapzen's Open Android app in 2014. Please use and adapt the open source scene file 
+# This style is a High Road influenced evolution of the Traditional style Stamen created
+# for Mapzen's Open Android app in 2014. Please use and adapt the open source scene file
 # in your own projects!
 #
 # Authors: Nathaniel V. Kelso, Geraldine Sarmiento
@@ -207,7 +207,7 @@ cinnabar-colors:
         - &building2   [.6, .6, .6]        # building stroke
         - &building_o  5                   # building stroke order
         - &building_e  true                # building stroke order
-    
+
     labels:
         - &text_fill          '#333'             # WHITE
         - &text_fill2         '#000'             # WHITE
@@ -220,7 +220,7 @@ cinnabar-colors:
         - &text_fill_beach    '#99905c'          # green
         - &text_fill_piste    '#444'             # dark gray
         - &text_fill_piste_e  '#666'             # dark gray early
-        - &text_fill_shield   white              # road shield fill color 
+        - &text_fill_shield   white              # road shield fill color
         - &text_stroke        '#e4e1de'          # land color
         - &text_stroke_water  [0.9, 0.9, 0.9]    # water stroke color
         - &text_stroke_park   '#bddec5'          # park stroke color
@@ -232,7 +232,7 @@ cinnabar-colors:
         - &text_stroke_road4   white             # road stroke color minor road
         - &text_stroke_shield  '#D16768'         # road shield stroke color &highway_casing1
         - &townspot_sprite    townspot-l-rev     # depends on land color and text settings
-        - &text_font_family  'Noto Sans Kannada'        # branding in asperational Unicode, yo (or Helvetica)
+        - &text_font_family  'Noto Sans Tamil'        # branding in asperational Unicode, yo (or Helvetica)
 
 textures:
     pois:
@@ -447,7 +447,7 @@ sources:
     # mz_default_polygon:
     #     type: GeoJSON
     #     url: https://gist.githubusercontent.com/anonymous/88235c795bb44b8c45150bdd5561f947/raw/71d4fab97b6513833bf1a589167119e6169ef86d/map.geojson
-    
+
 camera:
     type: isometric
     axis: [0, .1] # very small building extrusion
@@ -481,7 +481,7 @@ styles:
 
                     float chevron(vec2 st){
                         st = mirrorTile(st,vec2(1.,6.));
-                        float x = st.x*2.; 
+                        float x = st.x*2.;
                         float a = floor(1.+sin(x*3.14));
                         float b = floor(1.+sin((x+1.)*3.14));
                         float f = fract(x);
@@ -496,13 +496,13 @@ styles:
                     float xMargin(vec2 st,float margin){
                         return 1.0-clamp(step(margin*.5,st.x)*step(margin*.5,1.0-st.x),0.,1.);
                     }
-                    
+
                     //  Function from Iñigo Quiles
                     //  https://www.shadertoy.com/view/MsS3Wc
                     vec3 hsb2rgb( in vec3 c ){
                         vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
-                                                 6.0)-3.0)-1.0, 
-                                         0.0, 
+                                                 6.0)-3.0)-1.0,
+                                         0.0,
                                          1.0 );
                         rgb = rgb*rgb*(3.0-2.0*rgb);
                         return c.z * mix(vec3(1.0), rgb, c.y);
@@ -510,10 +510,10 @@ styles:
                 color: |
                     vec2 st = v_texcoord;
                     vec4 foreground = vec4(0.400,0.400,0.400,1.0);
-                    
+
                     vec3 color1 = hsb2rgb(vec3(color.r,1.,1.));
                     vec3 color2 = hsb2rgb(vec3(color.g,1.,1.));
-                    
+
                     // Nathaniel un-comment the following lines
                      color = mix(v_color,foreground, chevron(st) - xMargin(st,.25) );
                      color = mix(v_color,foreground, stripes(st) );
@@ -528,10 +528,10 @@ styles:
                     // GridTile
                     //=============================
                     varying vec3 v_pos;
-                    
+
                     #ifdef TANGRAM_FRAGMENT_SHADER
-                    
-                    vec2 TileCoords() { 
+
+                    vec2 TileCoords() {
                         return fract(v_pos.xy*0.0002445);
                     }
 
@@ -559,7 +559,7 @@ styles:
                         return smoothstep(threshold-afwidth, threshold+afwidth, value);
                       #else
                         return step(threshold, value);
-                      #endif  
+                      #endif
                     }
 
                     vec2 tile(vec2 _st, float _zoom){
@@ -660,7 +660,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    vec2 st = (TileCoords()+vec2(.4))*1000.; 
+                    vec2 st = (TileCoords()+vec2(.4))*1000.;
                     color.rgb = mix(vec3(0.899,0.95,1.0), vec3(0.899,0.95,1.0), gl_FragCoord.x / u_resolution.x);
                     color.rgb -= grain(gl_FragCoord.xy)*0.1;
 
@@ -845,7 +845,7 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
-                        
+
     # Used by the SDK to place point, line, and polygon overlays on the map
     mz_default_point:
         data: { source: mz_default_point }
@@ -902,7 +902,7 @@ layers:
                     color: *water1_o
                     width: [[10,1px],[12,2px]]
                     join: round
-    
+
     water-not-ocean:
         data: { source: osm, layer: water }
         filter: { not: { kind: ocean } }
@@ -951,7 +951,7 @@ layers:
 #                polygons:
 #                    order: 8
         water_boundaries-not-ocean:
-            filter: 
+            filter:
                 all:
                     - boundary: yes
                     - $zoom: { min: 14 }
@@ -1181,7 +1181,7 @@ layers:
                     text-blend-order:
                         priority: 50
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill_shield
                             size: 8px
@@ -1192,7 +1192,7 @@ layers:
                 draw:
                     text-blend-order:
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill_shield
                             size: 10px
@@ -1203,7 +1203,7 @@ layers:
                 draw:
                     text-blend-order:
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill_shield
                             size: 11px
@@ -1214,7 +1214,7 @@ layers:
                 draw:
                     text-blend-order:
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill_shield
                             size: 11px
@@ -1226,8 +1226,8 @@ layers:
                     text-blend-order:
                         priority: 50
                         visible: *text_visible_highway
-                        #text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        #text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill
                             size: 13px
@@ -1239,8 +1239,8 @@ layers:
                     text-blend-order:
                         priority: 50
                         visible: *text_visible_highway
-                        #text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        #text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill
                             size: 11px
@@ -1299,7 +1299,7 @@ layers:
                 text-blend-order:
                     priority: 56
                     visible: *text_visible_minor_road_e
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         fill: *text_fill_road_e
                         size: 11px
@@ -1332,7 +1332,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary_e2
-                                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                                 font:
                                     fill: *text_fill_shield
                                     size: 8px
@@ -1343,7 +1343,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary_e
-                                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                                 font:
                                     fill: *text_fill_shield
                                     size: 9px
@@ -1354,7 +1354,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary
-                                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                                 font:
                                     fill: *text_fill
                                     size: 11px
@@ -1365,7 +1365,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary
-                                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                                 font:
                                     fill: *text_fill
                                     size: 12px
@@ -1377,7 +1377,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary_e
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 11px
@@ -1389,7 +1389,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 12px
@@ -1400,7 +1400,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 14px
@@ -1411,7 +1411,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill2
                                 size: 14px
@@ -1422,7 +1422,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill2
                                 size: 15px
@@ -1433,7 +1433,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill2
                                 size: 16px
@@ -1479,7 +1479,7 @@ layers:
                             text-blend-order:
                                 priority: 54
                                 visible: *text_visible_secondary_e
-                                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                                 font:
                                     fill: *text_fill_road_e
                                     size: 13px
@@ -1518,37 +1518,37 @@ layers:
                                 outline:
                                     color: *green1_r
                 labels-secondary-z13:
-                    filter: 
+                    filter:
                         $zoom: [12,13,14]
                     draw:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary_e
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 10px
                                 stroke: { color: *text_stroke_road4, width: 1 }
                 labels-secondary-z15:
-                    filter: 
+                    filter:
                         $zoom: [15]
                     draw:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 11px
                                 stroke: { color: *text_stroke_road3, width: 3 }
                 labels-secondary-z16:
-                    filter: 
+                    filter:
                         $zoom: [16]
                     draw:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 11px
@@ -1559,7 +1559,7 @@ layers:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: [0.15,0.15,0.15]
                                 size: 12px
@@ -1657,7 +1657,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary_e
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill_road_e
                                 size: 11px
@@ -1682,7 +1682,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 12px
@@ -1693,7 +1693,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill
                                 size: 13px
@@ -1704,7 +1704,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                             font:
                                 fill: *text_fill2
                                 size: 15px
@@ -1721,7 +1721,7 @@ layers:
                 text-blend-order:
                     priority: 56
                     visible: *text_visible_minor_road_e
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         fill: *text_fill_road_e
                         size: 11px
@@ -1741,7 +1741,7 @@ layers:
                     lines:
                         cap: round
                         join: round
-            
+
             in_park:
                 filter: { landuse_kind: [park,protected_area,nature_reserve,conservation,golf_course,garden,wood,farmland,farm] }
                 draw:
@@ -1813,7 +1813,7 @@ layers:
                     text-blend-order:
                         priority: 56
                         visible: *text_visible_minor_road_e
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill_road_e
                             size: 11px
@@ -1838,7 +1838,7 @@ layers:
                     text-blend-order:
                         priority: 56
                         visible: *text_visible_minor_road
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill2
                             size: 15px
@@ -1915,7 +1915,7 @@ layers:
                     text-blend-order:
                         priority: 57
                         visible: *text_visible_service_road
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -1926,16 +1926,16 @@ layers:
                     text-blend-order:
                         priority: 57
                         visible: *text_visible_service_road
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill2
                             size: 12px
                             #stroke: { color: *text_stroke_road4, width: 4 }
         path:
-            filter: 
+            filter:
                 all:
                     - kind: path
-                not: 
+                not:
                     - highway: [steps, track]
                     - man_made: [pier]
             draw:
@@ -2033,7 +2033,7 @@ layers:
                     text-blend-order:
                         priority: 58
                         visible: *text_visible_path
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -2070,7 +2070,7 @@ layers:
                             color: [[16,*green1_r],[17,*major_casing1]]
                             width: [[14, 0px], [15, 0px], [16, 0.25px], [17, 0.5px], [18, 1.0px], [19, 2.0px]]
         steps:
-            filter: 
+            filter:
                 all:
                     - kind: path
                     - highway: steps
@@ -2111,7 +2111,7 @@ layers:
                     text-blend-order:
                         priority: 59
                         visible: *text_visible_steps
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -2132,12 +2132,12 @@ layers:
                         fill: *text_fill_piste
                         size: 12px
                         stroke: { color: *grey8, width: 4 }
-            early: 
+            early:
                 filter: { $zoom: { max: 15 } }
                 draw:
                     text-blend-order:
                         visible: false
-            early-z15: 
+            early-z15:
                 filter: { $zoom: [15] }
                 draw:
                     text-blend-order:
@@ -2156,18 +2156,18 @@ layers:
                         color: *piste_intermediate
             advanced:
                 filter: { piste_difficulty: advanced }
-                draw: 
+                draw:
                     lines:
                         color: *piste_advanced
-                    text-blend-order: 
-                        text_source: function() { if( feature['name:kn'] ){ return '◆ ' + feature['name:kn']; } else { return '◆'; } }
+                    text-blend-order:
+                        text_source: function() { if( feature['name:ta'] ){ return '◆ ' + feature['name:ta']; } else { return '◆'; } }
             expert:
                 filter: { piste_difficulty: expert }
-                draw: 
+                draw:
                     lines:
                         color: *piste_expert
                     text-blend-order:
-                        text_source: function() { if( feature['name:kn'] ){ return '◆◆ ' + feature['name:kn']; } else { return '◆◆'; } }
+                        text_source: function() { if( feature['name:ta'] ){ return '◆◆ ' + feature['name:ta']; } else { return '◆◆'; } }
         pier:
             filter: { kind: path, man_made: pier }
             draw:
@@ -2244,7 +2244,7 @@ layers:
                     text-blend-order:
                         priority: 59
                         visible: *text_visible_aerialway
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -2270,7 +2270,7 @@ layers:
     # buildings are the only layer that gets lighting
     buildings:
         data: { source: osm, layer: buildings }
-        filter: 
+        filter:
             any:
                 # limit show smaller landuse areas to higher zooms
                 - { $zoom: [13], area: { min: 100000 }, name: true }
@@ -2366,7 +2366,7 @@ layers:
 #            draw:
 #                polygons:
 #                    color: orange
-                
+
     building-labels:
         data: { source: osm, layer: buildings }
         filter:
@@ -2394,7 +2394,7 @@ layers:
                 move_into_tile: true
                 priority: 51
                 visible: *text_visible_building
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                 order: 7
                 font:
                     fill: *text_fill
@@ -2412,7 +2412,7 @@ layers:
             filter: { $zoom: { min: 20 } }
             draw: { text-blend-order: { font: { size: 14px, weight: 600, stroke: { width: 3 }  } } }
         building-labels-z16:
-            filter: function() { if( $zoom == 16 && feature['name:kn'].length > 20 ) { return true; } else { return false; } }
+            filter: function() { if( $zoom == 16 && feature['name:ta'].length > 20 ) { return true; } else { return false; } }
             draw:
                 text-blend-order:
                     visible: false
@@ -2464,7 +2464,7 @@ layers:
                     interactive: true
                     color: *country_boundary
                     width: [[1, 0.5px], [2, 1.0px], [4, 1.5px], [9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
             water:
                 filter: { maritime: yes }
@@ -2484,7 +2484,7 @@ layers:
                     interactive: true
                     color: *region_boundary
                     width: [[2, 0.75px], [3, 1px], [5, 1.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
             water:
                 filter: { maritime_boundary: yes }
@@ -2512,8 +2512,8 @@ layers:
                     interactive: true
                     color: *city_wall
                     width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
-   
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
+
         retaining_wall:
             filter: { kind: retaining_wall }
             draw:
@@ -2521,7 +2521,7 @@ layers:
                     interactive: true
                     color: *retaining_wall
                     width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
         fence:
             filter: { kind: fence }
@@ -2530,7 +2530,7 @@ layers:
                     interactive: true
                     color: *fence
                     width: [[16, 0px], [17, 1px], [18, 1.5px], [20, 0.5m]]
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
         snow_fence:
             filter: { kind: snow_fence }
@@ -2539,7 +2539,7 @@ layers:
                     interactive: true
                     color: *snow_fence
                     width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
 
     places:
@@ -2551,7 +2551,7 @@ layers:
                 font:
                     family: *text_font_family
                     weight: 500
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
         continent:
             filter: { name: true, kind: [continent], $zoom: {max: 5} }
@@ -2564,7 +2564,7 @@ layers:
                         fill: *text_fill
                         stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
         country-z2:
             filter:
@@ -2576,13 +2576,13 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         fill: *text_fill
                         weight: 400
                         size: 10px
                         transform: uppercase
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
         country-z3:
             filter: { name: true, population: true, kind: [country], $zoom: [3] }
@@ -2590,14 +2590,14 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         fill: *text_fill
                         size: 11px
                         weight: 600
                         # stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
             early-ones:
                 # US, Brazil, China, Russia, Canada, Greenland, Iceland, Australia, India, Japan, Guam, Indonesia, South Africa, Egypt, Nigeria, Kenya
                 filter: { not: { name: ["United States of America","Brasil","中华人民共和国","Россия","Canada","Kalaallit Nunaat","Ísland","Australia","India","日本","Guam","Indonesia","South Africa","مصر","Nigeria","Kenya"] }, $zoom: {min: 3, max: 4} }
@@ -2610,14 +2610,14 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 12px
                         weight: 600
                         fill: *text_fill
                         # stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
             early-ones-z4:
                 filter: { name: [Nederland,Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,Crna Gora,Македонија,The Gambia,Burundi,Swaziland,الإمارات العربية المتحدة,العراق,Singapore,El Salvador,Belize,Trinidad and Tobago, Saint Lucia, Montserrat,Anguilla,República Dominicana,Bahamas,British Virgin Islands,Antigua and Barbuda,Grenada,Sint Maarten,Saint Kitts and Nevis,Cayman Islands,België - Belgique - Belgien], $zoom: {min: 4, max: 5} }
                 draw:
@@ -2636,13 +2636,13 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 13px
                         weight: 400
                         fill: *text_fill
                         # stroke: { color: *text_stroke, width: 4 }
-                        transform: uppercase                        
+                        transform: uppercase
             early-ones-z5:
                 filter: { name: [Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,El Salvador,Belize,België - Belgique - Belgien], $zoom: {min: 5, max: 6} }
                 draw:
@@ -2655,7 +2655,7 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 14px
                         weight: 600
@@ -2674,7 +2674,7 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 16px
                         weight: 800
@@ -2693,7 +2693,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 10px
                         weight: 200
@@ -2705,7 +2705,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 13px
                         weight: 200
@@ -2717,7 +2717,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 13px
                         weight: 200
@@ -2728,7 +2728,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     font:
                         size: 14px
                         weight: 300
@@ -2744,7 +2744,7 @@ layers:
                 filter: { name: ["Delaware","New Jersey","Connecticut","Rhode Island","Massachusetts","New Hampshire","Vermont"], $zoom: {min: 6, max: 8} }
                 draw:
                     text-blend-order:
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         font: { transform: uppercase }
 
         populated-places:
@@ -2756,7 +2756,7 @@ layers:
                     interactive: true
                     anchor: bottom
                     priority: 6
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                        
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
 
             populated-places-natural-earth-z2:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [2], scalerank: 0 }
@@ -3222,7 +3222,7 @@ layers:
                                     size: 12px
                             icons:
                                 sprite: capital-s
-                                    
+
             populated-places-natural-earth-z8-backfill:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [8], population: { max: 50000 } }
                 draw: { text-blend-order: { font: { fill: *text_fill, stroke: { color: *text_stroke, width: 2px } } } }
@@ -3326,7 +3326,7 @@ layers:
                             priority: 8
                             font:
                                 size: 15px
-                                    
+
                 z9places-2b:
                     filter:
                         any:
@@ -3540,7 +3540,7 @@ layers:
                         - not: { kind: [country, county, state, island, neighbourhood, suburb, quarter] }
                         - $zoom: [10]
                 draw: { text-blend-order: { font: { fill: *text_fill, stroke: { color: *text_stroke, width: 3px } } } }
-                
+
                 z10places-1:
                     filter:
                         any:
@@ -4209,7 +4209,7 @@ layers:
                             transform: uppercase
                             stroke: { color: *text_stroke, width: 3 }
                 z15-new:
-                    filter: 
+                    filter:
                         all:
                             - min_zoom: 15
                     draw:
@@ -4251,7 +4251,7 @@ layers:
             text-blend-order:
                 visible: *text_visible_exits
                 interactive: true
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                 priority: 52
                 font:
                     fill: *text_fill_exits
@@ -4277,7 +4277,7 @@ layers:
             text-blend-order:
                 visible: *text_visible_airport_gate
                 interactive: true
-                text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                 font:
                     fill: *text_fill
                     size: [[16,9px],[17,12px],[20,14px]]
@@ -4292,7 +4292,7 @@ layers:
     pois_and_landuse_labels:
         data: { source: osm, layer: [pois,landuse,buildings] }
         visible: *label_visible_poi_landuse
-        filter: 
+        filter:
             not: { kind: [building,farm,tree,gate,address,apron] }
             any:
                 - area: false
@@ -4387,7 +4387,7 @@ layers:
         has-name:
             draw:
                 text-blend-order:
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }                                        
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
             filter: { name: true }
             # match 1:1 correlations between data and sprite name
             direct-match:
@@ -4807,9 +4807,9 @@ layers:
                 residential-relations-paris-wtf:
                     filter: { kind: [residential], osm_relation: true, $zoom: { min: 13 } }
                     draw:
-                        text-blend-order: 
+                        text-blend-order:
                             visible: true
-                            text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                            text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         icons:
                             visible: false
                 hide-till-later:
@@ -4954,14 +4954,14 @@ layers:
                         icons:
                             visible: false
                             #size: [[12, 6px], [14, 6px], [15, 16px]]
-                        text-blend-order: { visible: false } 
+                        text-blend-order: { visible: false }
                 low-priority-early-z13:
                     filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
                     draw:
                         icons:
                             visible: false
                             #size: [[12, 6px], [14, 6px], [15, 16px]]
-                        text-blend-order: { visible: false } 
+                        text-blend-order: { visible: false }
                 low-priority-early-z14:
                     filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                     draw:
@@ -5499,13 +5499,13 @@ layers:
                 filter: { $zoom: { min: 1, max: 4 } }
                 draw:
                     text-blend-order:
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         text_wrap: false
             ocean-spacer-z4-up:
                 filter: { $zoom: { min: 4 } }
                 draw:
                     text-blend-order:
-                        text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                        text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                         text_wrap: false
         ocean-labels-z1:
             filter: { $zoom: [1] }
@@ -5528,7 +5528,7 @@ layers:
             filter: { not: { kind: [ocean] }, $zoom: { min: 5 } }
             draw:
                 text-blend-order:
-                    text_source: function() { if( feature['name:kn'] ) { return feature['name:kn']; } else { return ""; } }
+                    text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
                     text_wrap: false
 
         sea-labels:
@@ -5629,8 +5629,8 @@ layers:
 
     landuse:
         data: { source: osm }
-        draw: 
-            polygons: 
+        draw:
+            polygons:
                 order: function() { return feature.sort_key; }
         tier1:
             filter:
@@ -5896,7 +5896,7 @@ layers:
                         visible: *grey8_v
             man-made:
                 filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
-                draw: 
+                draw:
                     polygons:
                         color: *grey3
                 pier:
@@ -6048,7 +6048,7 @@ layers:
                 - enclosure
                 - petting_zoo
                 - aviary
-        draw: 
+        draw:
             polygons:
                 order: function() { return feature.sort_key; }
         runway:
@@ -6097,7 +6097,7 @@ layers:
                     style: lines
                     color: *green11_o
                     width: [[14,0px],[15,1px],[16,0.5m]]
-                    
+
     landuse_urban_area-early:
         data: { source: osm, layer: landuse }
         filter:
