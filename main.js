@@ -278,7 +278,7 @@ function loadmap(styleFile, defaultLoc) {
 	return map;
 }
 
-var pageName = location.href.split(".")[0].split("/").splice(-1)[0].trim();
+var pageName = location.href.split(".")[2].split("/")[2].trim();
 
 var styleFile, defaultLocation;
 switch (pageName) {
