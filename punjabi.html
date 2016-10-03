@@ -10,25 +10,24 @@
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>Tamil Maps using Tangram by MapZen</title>
+	<title>Mapzen - Tangram powered Punjabi Maps using Openstreetmap</title>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
-
-	<style>
-		@import url(https://fonts.googleapis.com/earlyaccess/notosanstamil.css);
+		<style>
+		@import url(https://fonts.googleapis.com/earlyaccess/notosansgurmukhi.css);
 
 		body {
 			margin: 0px;
 			border: 0px;
 			padding: 0px;
-			font-family: 'Noto Sans Tamil', Helvetica, sans-serif;
+			font-family: 'Noto Sans Gurmukhi', Helvetica, sans-serif;
 		}
 
 		#map {
 			background: rgba(0, 0, 0, 0);
 			height: 100%;
 			width: 100%;
-			position: absolute;
+			position: fixed;
 		}
 
 
@@ -56,7 +55,7 @@
 
 	.labelInner {
 		padding: 3px 0px;
-		font-family:'Noto Sans Tamil UI', Helvetica, sans-serif;
+		font-family:'Noto Sans Gurmukhi UI', Helvetica, sans-serif;
 		font-size: 16px;
 		color: white;
 		opacity: 2.0;
@@ -79,9 +78,28 @@
 	}
 
 	</style>
+
   </head>
 
   <body>
+	<div align="right" style="text-align:right;">
+		<select id="languageSel" onchange="ChangeLanguage()">
+			<option>Punjabi</option>
+			<option>Telugu</option>
+			<option>Tamil</option>
+			<option>Kannada</option>
+			<option>Bengali</option>
+			<option>Hindi</option>
+			<option>Odia</option>
+			<option>Gujarati</option>
+			<option>Malayalam</option>
+			<option>Urdu</option>
+			<option>Marathi</option>
+			<option>Nepali</option>
+		</select>
+	</div>
+
+	<div align="center" style="text-align:center;">Openstreetmaps Punjabi Map</div>
 	<div class="label" id="popup"></div>
 	<div id="map"></div>
 
@@ -109,8 +127,8 @@
 	<script>
 	  MPZN.bug({
 	  link: 'http://blog.srik.me/2016/09/24/tamil-web-maps/',
-	  tweet: 'தமிழில் வரைபடங்கள் பயன்படுத்தவீர்!! நன்றி @mapzen #TamilMap',
-	  repo: 'https://github.com/srikanthlogic/tangrams-tamil'
+	  tweet: '#Punjabi maps powered by @mapzen and @openstreetmap #PunjabiMap',
+	  repo: 'https://github.com/srikanthlogic/tangrams-indic'
 	});
 	</script>
   </body>

@@ -1,14 +1,13 @@
 /*jslint browser: true*/
 /*global Tangram */
 var picking = false;
-map = (function () {
-// (function () {
+//map = (function () {
+
+function loadmap(styleFile, defaultLoc) {
 	// 'use strict';
 
-	// defaults
-	var map_start_location = [11.464, 78.951, 8]; // North TN
-	var style_file = 'cinnabar-style-more-labels.yaml';
-
+	var map_start_location = defaultLoc;
+	var style_file = styleFile;
 	/*** URL parsing ***/
 
 	// leaflet-style URL hash pattern:
@@ -20,13 +19,12 @@ map = (function () {
 
 	// location is passed through url
 	if (url_hash.length == 3) {
-		var defaultpos = false;
+		defaultpos = false;
 		if (url_hash[1] > 180) { // parse hash as tile coordinates
 			// example: http://localhost:9001/#15/5242/12663
 			// add .5 to coords to center tile on screen
 			map_start_location = [tile2lat(parseFloat(url_hash[2]) + .5, url_hash[0]), tile2long(parseFloat(url_hash[1]) + .5, url_hash[0]), url_hash[0]];
-		}
-		else { // parse hash as lat/lng coordinates
+		} else { // parse hash as lat/lng coordinates
 			map_start_location = [url_hash[1],url_hash[2], url_hash[0]];
 			// convert from strings
 			map_start_location = map_start_location.map(Number);
@@ -92,7 +90,7 @@ map = (function () {
 
 			var pixel = { x: event.clientX, y: event.clientY };
 
-			scene.getFeatureAt(pixel).then(function(selection) {
+			scene.getFeatureAt(pixel).then(function (selection) {
 				if (!selection || selection.feature == null || selection.feature.properties == null) {
 					picking = false;
 					popup.style.visibility = 'hidden';
@@ -278,4 +276,64 @@ map = (function () {
 	});
 
 	return map;
-}());
+}
+
+var pageName = location.href.split(".")[0].split("/").splice(-1)[0].trim();
+
+var styleFile, defaultLocation;
+switch (pageName) {
+	case 'hindi':
+		styleFile='styles/cinnabar-style-more-labels-hi.yaml';
+		defaultLocation = [22.746, 81.216, 6];
+		break;
+	case 'marathi':
+		styleFile='styles/cinnabar-style-more-labels-mr.yaml';
+		defaultLocation = [18.693, 74.144, 8];
+		break;
+	case 'tamil':
+		styleFile='styles/cinnabar-style-more-labels-ta.yaml';
+		defaultLocation = [11.464, 78.951, 8];
+		break;
+	case 'kannada':
+		styleFile='styles/cinnabar-style-more-labels-kn.yaml';
+		defaultLocation=[13.619, 76.484, 8];
+		break;
+	case 'telugu':
+		styleFile='styles/cinnabar-style-more-labels-te.yaml';
+		defaultLocation=[16.673, 80.461, 8];
+		break;
+	case 'urdu':
+		styleFile='styles/cinnabar-style-more-labels-ur.yaml';
+		defaultLocation=[27.037, 81.917, 8];
+		break;
+	case 'nepali':
+		styleFile='styles/cinnabar-style-more-labels-ne.yaml';
+		defaultLocation=[27.918, 84.451, 8];
+		break;
+	case 'bengali':
+		styleFile='styles/cinnabar-style-more-labels-bn.yaml';
+		defaultLocation=[23.524, 88.396, 7];
+		break;
+	case 'malayalam':
+		styleFile='styles/cinnabar-style-more-labels-ml.yaml';
+		defaultLocation=[10.601, 76.182, 8];
+		break;
+	case 'punjabi':
+		styleFile='styles/cinnabar-style-more-labels-pa.yaml';
+		defaultLocation=[30.732, 77.308, 8];
+		break;
+	case 'gujarati':
+		styleFile='styles/cinnabar-style-more-labels-gu.yaml';
+		defaultLocation=[22.406, 71.820, 8];
+		break;
+	case 'odia':
+		styleFile='styles/cinnabar-style-more-labels-or.yaml';
+		defaultLocation=[19.477, 85.312, 8];
+		break;
+}
+
+map = loadmap(styleFile,defaultLocation);
+
+function ChangeLanguage() {
+		window.location='./' + languageSel.value.toLowerCase() + '.html';
+}
