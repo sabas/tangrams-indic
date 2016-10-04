@@ -1,4 +1,4 @@
-#Openstreetmap Indic Maps - Powered by @Mapzen @Tangram
+#Openstreetmap Indic Maps - Powered by @Mapzen @Tangrams
 
 * [Bengali](http://srikanthlogic.github.io/tangrams-indic/bengali.html)
 * [Gujarati](http://srikanthlogic.github.io/tangrams-indic/gujarati.html)
