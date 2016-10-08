@@ -114,9 +114,9 @@ cinnabar-colors:
         - &piste_expert               '#a6a6a6'
 
     boundaries:
-        - &country_boundary           '#fff'
-        - &region_boundary            '#eee'
-        - &subregion_boundary         '#eee'
+        - &country_boundary           '#404040'
+        - &region_boundary            '#808080'
+        - &subregion_boundary         '#CCCCCC'
         - &city_wall                  '#ccb38f'
         - &retaining_wall             '#d9c4a5'
         - &snow_fence                 '#d9c4a5'
@@ -395,6 +395,10 @@ sources:
         url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-pAwVVHr
         #url: '//vector.dev.mapzen.com/osm/all/{z}/{x}/{y}.topojson'
         #url:  //localhost:8080/osm/all/{z}/{x}/{y}.json
+        max_zoom: 16
+    indiaborder:
+        type: GeoJSON
+        url: indianborder.geojson
         max_zoom: 16
 
     # # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
@@ -866,6 +870,16 @@ layers:
                 color: '#06a6d4'
                 order: 503
                 width: 3px
+
+    indiaborder:
+        data: { source: indiaborder }
+        draw:
+            sdk-line-overlay:
+                interactive: true
+                color: '#404040'
+                width: [[1, 0.5px], [2, 1.0px], [4, 1.5px], [9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
+                order: 501
+
     mz_default_polygon:
         data: { source: mz_default_polygon }
         draw:
@@ -2464,7 +2478,7 @@ layers:
                     interactive: true
                     color: *country_boundary
                     width: [[1, 0.5px], [2, 1.0px], [4, 1.5px], [9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
-                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return feature.name; } }
 
             water:
                 filter: { maritime: yes }
@@ -2484,7 +2498,7 @@ layers:
                     interactive: true
                     color: *region_boundary
                     width: [[2, 0.75px], [3, 1px], [5, 1.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
-                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return ""; } }
+                text_source: function() { if( feature['name:ta'] ) { return feature['name:ta']; } else { return feature.name; } }
 
             water:
                 filter: { maritime_boundary: yes }
@@ -2497,13 +2511,13 @@ layers:
                     lines:
                         visible: false
 
-#        subregions:
-#            filter: { kind: county, $zoom: { min: 10 } }
-#            draw:
-#                lines:
-#                    interactive: true
-#                    color: *subregion_boundary
-#                    width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
+        subregions:
+            filter: { kind: district, $zoom: { min: 10 } }
+            draw:
+                lines:
+                    interactive: true
+                    color: *subregion_boundary
+                    width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
 
         city_walls:
             filter: { kind: city_wall }
