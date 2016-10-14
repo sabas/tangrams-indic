@@ -279,7 +279,8 @@ function loadmap(styleFile, defaultLoc) {
 	return map;
 }
 
-		styleFile='./styles/cinnabar-style-more-labels-sc.yaml';
+		styleFile='./styles/bubble-wrap.yaml';
+		//styleFile='./styles/cinnabar-style-more-labels-sc.yaml';
 		defaultLocation = [40.1043, 8.7396, 8];
 
 
