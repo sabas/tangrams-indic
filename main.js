@@ -159,7 +159,8 @@ function loadmap(styleFile, defaultLoc) {
 		var zoom = max_zoom < map.getZoom() ? max_zoom : Math.floor(map.getZoom());
 		var tileCoords = { x : long2tile(latlng.lng,zoom), y: lat2tile(latlng.lat,zoom), z: zoom };
 
-		var url = 'http://vector.mapzen.com/osm/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson?api_key=mapzen-sAkzNNV';
+		var apiKey = 'mapzen-rX6RJo5';
+		var url = 'http://tile.mapzen.com/mapzen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson?api_key=' + apiKey;
 		return url;
 	}
 
@@ -278,62 +279,10 @@ function loadmap(styleFile, defaultLoc) {
 	return map;
 }
 
-var pageName = location.href.split(".")[2].split("/")[2].trim();
+		styleFile='./styles/cinnabar-style-more-labels-sc.yaml';
+		defaultLocation = [40.1043, 8.7396, 8];
 
-var styleFile, defaultLocation;
-switch (pageName) {
-	case 'hindi':
-		styleFile='./styles/cinnabar-style-more-labels-hi.yaml';
-		defaultLocation = [22.746, 81.216, 6];
-		break;
-	case 'marathi':
-		styleFile='./styles/cinnabar-style-more-labels-mr.yaml';
-		defaultLocation = [18.693, 74.144, 8];
-		break;
-	case 'tamil':
-		styleFile='./styles/cinnabar-style-more-labels-ta.yaml';
-		defaultLocation = [11.464, 78.951, 8];
-		break;
-	case 'kannada':
-		styleFile='./styles/cinnabar-style-more-labels-kn.yaml';
-		defaultLocation=[13.619, 76.484, 8];
-		break;
-	case 'telugu':
-		styleFile='./styles/cinnabar-style-more-labels-te.yaml';
-		defaultLocation=[16.673, 80.461, 8];
-		break;
-	case 'urdu':
-		styleFile='./styles/cinnabar-style-more-labels-ur.yaml';
-		defaultLocation=[27.037, 81.917, 8];
-		break;
-	case 'nepali':
-		styleFile='./styles/cinnabar-style-more-labels-ne.yaml';
-		defaultLocation=[27.918, 84.451, 8];
-		break;
-	case 'bengali':
-		styleFile='./styles/cinnabar-style-more-labels-bn.yaml';
-		defaultLocation=[23.524, 88.396, 7];
-		break;
-	case 'malayalam':
-		styleFile='./styles/cinnabar-style-more-labels-ml.yaml';
-		defaultLocation=[10.601, 76.182, 8];
-		break;
-	case 'punjabi':
-		styleFile='./styles/cinnabar-style-more-labels-pa.yaml';
-		defaultLocation=[30.732, 77.308, 8];
-		break;
-	case 'gujarati':
-		styleFile='./styles/cinnabar-style-more-labels-gu.yaml';
-		defaultLocation=[22.406, 71.820, 8];
-		break;
-	case 'odia':
-		styleFile='./styles/cinnabar-style-more-labels-or.yaml';
-		defaultLocation=[19.477, 85.312, 8];
-		break;
-}
+
 
 map = loadmap(styleFile,defaultLocation);
 
-function ChangeLanguage() {
-		window.location='./' + languageSel.value.toLowerCase() + '.html';
-}

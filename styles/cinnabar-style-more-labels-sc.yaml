@@ -89,12 +89,12 @@ cinnabar-colors:
         - &major_route2               '#e3989a'           # zoomed out
         - &minor_route                '#d19596'           # same as major_route
         - &minor_road1                white               # natural earth
-        - &minor_road2                whtie               # natural earth, same as major_road2
+        - &minor_road2                white               # natural earth, same as major_road2
         - &minor_road3                white
         - &minor_road4                white               # zoomed out
         - &minor_road5                white               # zoomed out, again
         - &minor_casing1              white               # same as highway_casing1
-        - &minor_casing2              grey                # zoomed out
+        - &minor_casing2              white                # zoomed out
         - &minor_tunnel1              white
         - &minor_tunnel_casing1       [0.3, 0.3, 0.3]
         - &service_road1              white
@@ -232,7 +232,7 @@ cinnabar-colors:
         - &text_stroke_road4   white             # road stroke color minor road
         - &text_stroke_shield  '#D16768'         # road shield stroke color &highway_casing1
         - &townspot_sprite    townspot-l-rev     # depends on land color and text settings
-        - &text_font_family  'Noto Sans Oriya'        # branding in asperational Unicode, yo (or Helvetica)
+        - &text_font_family  'Noto Sans Devanagiri'        # branding in asperational Unicode, yo (or Helvetica)
 
 textures:
     pois:
@@ -392,7 +392,7 @@ textures:
 sources:
     osm:
         type: TopoJSON #GeoJSON, MVT, TopoJSON
-        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-pAwVVHr
+        url:  //tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson?api_key=mapzen-rX6RJo5
         #url: '//vector.dev.mapzen.com/osm/all/{z}/{x}/{y}.topojson'
         #url:  //localhost:8080/osm/all/{z}/{x}/{y}.json
         max_zoom: 16
@@ -1181,7 +1181,7 @@ layers:
                     text-blend-order:
                         priority: 50
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill_shield
                             size: 8px
@@ -1192,7 +1192,7 @@ layers:
                 draw:
                     text-blend-order:
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill_shield
                             size: 10px
@@ -1203,7 +1203,7 @@ layers:
                 draw:
                     text-blend-order:
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill_shield
                             size: 11px
@@ -1214,7 +1214,7 @@ layers:
                 draw:
                     text-blend-order:
                         visible: *text_visible_shields
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill_shield
                             size: 11px
@@ -1226,8 +1226,8 @@ layers:
                     text-blend-order:
                         priority: 50
                         visible: *text_visible_highway
-                        #text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        #text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill
                             size: 13px
@@ -1239,8 +1239,8 @@ layers:
                     text-blend-order:
                         priority: 50
                         visible: *text_visible_highway
-                        #text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        #text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill
                             size: 11px
@@ -1299,7 +1299,7 @@ layers:
                 text-blend-order:
                     priority: 56
                     visible: *text_visible_minor_road_e
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         fill: *text_fill_road_e
                         size: 11px
@@ -1332,7 +1332,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary_e2
-                                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                                 font:
                                     fill: *text_fill_shield
                                     size: 8px
@@ -1343,7 +1343,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary_e
-                                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                                 font:
                                     fill: *text_fill_shield
                                     size: 9px
@@ -1354,7 +1354,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary
-                                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                                 font:
                                     fill: *text_fill
                                     size: 11px
@@ -1365,7 +1365,7 @@ layers:
                             text-blend-order:
                                 priority: 53
                                 visible: *text_visible_trunk_primary
-                                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                                 font:
                                     fill: *text_fill
                                     size: 12px
@@ -1377,7 +1377,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary_e
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 11px
@@ -1389,7 +1389,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 12px
@@ -1400,7 +1400,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 14px
@@ -1411,7 +1411,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill2
                                 size: 14px
@@ -1422,7 +1422,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill2
                                 size: 15px
@@ -1433,7 +1433,7 @@ layers:
                         text-blend-order:
                             priority: 53
                             visible: *text_visible_trunk_primary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill2
                                 size: 16px
@@ -1479,7 +1479,7 @@ layers:
                             text-blend-order:
                                 priority: 54
                                 visible: *text_visible_secondary_e
-                                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                                 font:
                                     fill: *text_fill_road_e
                                     size: 13px
@@ -1524,7 +1524,7 @@ layers:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary_e
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 10px
@@ -1536,7 +1536,7 @@ layers:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 11px
@@ -1548,7 +1548,7 @@ layers:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 11px
@@ -1559,7 +1559,7 @@ layers:
                         text-blend-order:
                             priority: 54
                             visible: *text_visible_secondary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: [0.15,0.15,0.15]
                                 size: 12px
@@ -1657,7 +1657,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary_e
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill_road_e
                                 size: 11px
@@ -1682,7 +1682,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 12px
@@ -1693,7 +1693,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill
                                 size: 13px
@@ -1704,7 +1704,7 @@ layers:
                         text-blend-order:
                             priority: 55
                             visible: *text_visible_tertiary
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                             font:
                                 fill: *text_fill2
                                 size: 15px
@@ -1721,7 +1721,7 @@ layers:
                 text-blend-order:
                     priority: 56
                     visible: *text_visible_minor_road_e
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         fill: *text_fill_road_e
                         size: 11px
@@ -1813,7 +1813,7 @@ layers:
                     text-blend-order:
                         priority: 56
                         visible: *text_visible_minor_road_e
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill_road_e
                             size: 11px
@@ -1838,7 +1838,7 @@ layers:
                     text-blend-order:
                         priority: 56
                         visible: *text_visible_minor_road
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill2
                             size: 15px
@@ -1915,7 +1915,7 @@ layers:
                     text-blend-order:
                         priority: 57
                         visible: *text_visible_service_road
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -1926,7 +1926,7 @@ layers:
                     text-blend-order:
                         priority: 57
                         visible: *text_visible_service_road
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill2
                             size: 12px
@@ -2033,7 +2033,7 @@ layers:
                     text-blend-order:
                         priority: 58
                         visible: *text_visible_path
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -2111,7 +2111,7 @@ layers:
                     text-blend-order:
                         priority: 59
                         visible: *text_visible_steps
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -2160,14 +2160,14 @@ layers:
                     lines:
                         color: *piste_advanced
                     text-blend-order:
-                        text_source: function() { if( feature['name:or'] ){ return '◆ ' + feature['name:or']; } else { return '◆'; } }
+                        text_source: function() { if( feature['name:sc'] ){ return '◆ ' + feature['name:sc']; } else { return '◆'; } }
             expert:
                 filter: { piste_difficulty: expert }
                 draw:
                     lines:
                         color: *piste_expert
                     text-blend-order:
-                        text_source: function() { if( feature['name:or'] ){ return '◆◆ ' + feature['name:or']; } else { return '◆◆'; } }
+                        text_source: function() { if( feature['name:sc'] ){ return '◆◆ ' + feature['name:sc']; } else { return '◆◆'; } }
         pier:
             filter: { kind: path, man_made: pier }
             draw:
@@ -2244,7 +2244,7 @@ layers:
                     text-blend-order:
                         priority: 59
                         visible: *text_visible_aerialway
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font:
                             fill: *text_fill
                             size: 12px
@@ -2394,7 +2394,7 @@ layers:
                 move_into_tile: true
                 priority: 51
                 visible: *text_visible_building
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                 order: 7
                 font:
                     fill: *text_fill
@@ -2412,7 +2412,7 @@ layers:
             filter: { $zoom: { min: 20 } }
             draw: { text-blend-order: { font: { size: 14px, weight: 600, stroke: { width: 3 }  } } }
         building-labels-z16:
-            filter: function() { if( $zoom == 16 && feature['name:or'].length > 20 ) { return true; } else { return false; } }
+            filter: function() { if( $zoom == 16 && feature['name:sc'].length > 20 ) { return true; } else { return false; } }
             draw:
                 text-blend-order:
                     visible: false
@@ -2464,7 +2464,7 @@ layers:
                     interactive: true
                     color: *country_boundary
                     width: [[1, 0.5px], [2, 1.0px], [4, 1.5px], [9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
             water:
                 filter: { maritime: yes }
@@ -2484,7 +2484,7 @@ layers:
                     interactive: true
                     color: *region_boundary
                     width: [[2, 0.75px], [3, 1px], [5, 1.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
             water:
                 filter: { maritime_boundary: yes }
@@ -2512,7 +2512,7 @@ layers:
                     interactive: true
                     color: *city_wall
                     width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
         retaining_wall:
             filter: { kind: retaining_wall }
@@ -2521,7 +2521,7 @@ layers:
                     interactive: true
                     color: *retaining_wall
                     width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
         fence:
             filter: { kind: fence }
@@ -2530,7 +2530,7 @@ layers:
                     interactive: true
                     color: *fence
                     width: [[16, 0px], [17, 1px], [18, 1.5px], [20, 0.5m]]
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
         snow_fence:
             filter: { kind: snow_fence }
@@ -2539,7 +2539,7 @@ layers:
                     interactive: true
                     color: *snow_fence
                     width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
 
     places:
@@ -2551,7 +2551,7 @@ layers:
                 font:
                     family: *text_font_family
                     weight: 500
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
         continent:
             filter: { name: true, kind: [continent], $zoom: {max: 5} }
@@ -2564,7 +2564,7 @@ layers:
                         fill: *text_fill
                         stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
         country-z2:
             filter:
@@ -2576,13 +2576,13 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         fill: *text_fill
                         weight: 400
                         size: 10px
                         transform: uppercase
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
         country-z3:
             filter: { name: true, population: true, kind: [country], $zoom: [3] }
@@ -2590,14 +2590,14 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         fill: *text_fill
                         size: 11px
                         weight: 600
                         # stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
             early-ones:
                 # US, Brazil, China, Russia, Canada, Greenland, Iceland, Australia, India, Japan, Guam, Indonesia, South Africa, Egypt, Nigeria, Kenya
                 filter: { not: { name: ["United States of America","Brasil","中华人民共和国","Россия","Canada","Kalaallit Nunaat","Ísland","Australia","India","日本","Guam","Indonesia","South Africa","مصر","Nigeria","Kenya"] }, $zoom: {min: 3, max: 4} }
@@ -2610,14 +2610,14 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 12px
                         weight: 600
                         fill: *text_fill
                         # stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
             early-ones-z4:
                 filter: { name: [Nederland,Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,Crna Gora,Македонија,The Gambia,Burundi,Swaziland,الإمارات العربية المتحدة,العراق,Singapore,El Salvador,Belize,Trinidad and Tobago, Saint Lucia, Montserrat,Anguilla,República Dominicana,Bahamas,British Virgin Islands,Antigua and Barbuda,Grenada,Sint Maarten,Saint Kitts and Nevis,Cayman Islands,België - Belgique - Belgien], $zoom: {min: 4, max: 5} }
                 draw:
@@ -2636,7 +2636,7 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 13px
                         weight: 400
@@ -2655,7 +2655,7 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 14px
                         weight: 600
@@ -2674,7 +2674,7 @@ layers:
                 text-blend-order:
                     priority: 3
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 16px
                         weight: 800
@@ -2693,7 +2693,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 10px
                         weight: 200
@@ -2705,7 +2705,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 13px
                         weight: 200
@@ -2717,7 +2717,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 13px
                         weight: 200
@@ -2728,7 +2728,7 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: *text_visible_admin
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     font:
                         size: 14px
                         weight: 300
@@ -2744,7 +2744,7 @@ layers:
                 filter: { name: ["Delaware","New Jersey","Connecticut","Rhode Island","Massachusetts","New Hampshire","Vermont"], $zoom: {min: 6, max: 8} }
                 draw:
                     text-blend-order:
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         font: { transform: uppercase }
 
         populated-places:
@@ -2756,7 +2756,7 @@ layers:
                     interactive: true
                     anchor: bottom
                     priority: 6
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
 
             populated-places-natural-earth-z2:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [2], scalerank: 0 }
@@ -4251,7 +4251,7 @@ layers:
             text-blend-order:
                 visible: *text_visible_exits
                 interactive: true
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                 priority: 52
                 font:
                     fill: *text_fill_exits
@@ -4277,7 +4277,7 @@ layers:
             text-blend-order:
                 visible: *text_visible_airport_gate
                 interactive: true
-                text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                 font:
                     fill: *text_fill
                     size: [[16,9px],[17,12px],[20,14px]]
@@ -4387,7 +4387,7 @@ layers:
         has-name:
             draw:
                 text-blend-order:
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
             filter: { name: true }
             # match 1:1 correlations between data and sprite name
             direct-match:
@@ -4809,7 +4809,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: true
-                            text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                            text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         icons:
                             visible: false
                 hide-till-later:
@@ -5499,13 +5499,13 @@ layers:
                 filter: { $zoom: { min: 1, max: 4 } }
                 draw:
                     text-blend-order:
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         text_wrap: false
             ocean-spacer-z4-up:
                 filter: { $zoom: { min: 4 } }
                 draw:
                     text-blend-order:
-                        text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                        text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                         text_wrap: false
         ocean-labels-z1:
             filter: { $zoom: [1] }
@@ -5528,7 +5528,7 @@ layers:
             filter: { not: { kind: [ocean] }, $zoom: { min: 5 } }
             draw:
                 text-blend-order:
-                    text_source: function() { if( feature['name:or'] ) { return feature['name:or']; } else { return ""; } }
+                    text_source: function() { if( feature['name:co'] ) { return feature['name:co']; } else if( feature['name:lij'] ) { return feature['name:lij']; } else if( feature['name:sc'] ) { return feature['name:sc']; } else { return feature['name']; } }
                     text_wrap: false
 
         sea-labels:

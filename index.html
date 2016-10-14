@@ -1,58 +1,118 @@
 <!doctype html>
-<html>
+<!--
+	Tangram: real-time WebGL rendering for OpenStreetMap
+
+	http://github.com/tangrams/tangram
+	http://mapzen.com
+-->
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Tangrams-indic by srikanthlogic</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Mapzen - Tangram powered Hindi Maps using Openstreetmap</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+		<style>
+		@import url(https://fonts.googleapis.com/earlyaccess/notosansdevanagari.css);
+
+		body {
+			margin: 0px;
+			border: 0px;
+			padding: 0px;
+			font-family: 'Noto Sans Devanagari', Helvetica, sans-serif;
+		}
+
+		#map {
+			background: rgba(0, 0, 0, 0);
+			height: 100%;
+			width: 100%;
+			position: fixed;
+		}
+
+
+	.label {
+		width: auto;
+		/*margin-left: -100px;*/
+		position: absolute;
+		z-index: 500;
+		text-align: left;
+		margin: 0px;
+		background: #333;
+		opacity: 0.9;
+		padding: 2px;
+		visibility: hidden;
+		/*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+		/*word-wrap: break-word;*/
+	}
+	.label a {
+		color: white;
+	}
+
+	.label a:hover {
+		color: lightblue;
+	}
+
+	.labelInner {
+		padding: 3px 0px;
+		font-family:'Noto Sans Devanagari UI', Helvetica, sans-serif;
+		font-size: 16px;
+		color: white;
+		opacity: 2.0;
+		margin: 0px;
+	}
+
+	.labelLine {
+		/*border: 2px solid gold;*/
+	}
+
+	.labelLine:hover {
+		border: 2px solid gold;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		cursor: default;
+	}
+
+	</style>
+
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Tangrams-indic</h1>
-        <p>Tangram - Indic Maps</p>
 
-        <p class="view"><a href="https://github.com/srikanthlogic/tangrams-indic">View the Project on GitHub <small>srikanthlogic/tangrams-indic</small></a></p>
+	<div class="label" id="popup"></div>
+	<div id="map"></div>
 
+	<!-- 3rd party libraries -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
+	<!-- bog-standard leaflet URL hash -->
+	<script src="lib/leaflet-hash.js"></script>
 
-        <ul>
-          <li><a href="https://github.com/srikanthlogic/tangrams-indic/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/srikanthlogic/tangrams-indic/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/srikanthlogic/tangrams-indic">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a id="openstreetmap-indic-maps---powered-by-mapzen-tangram" class="anchor" href="#openstreetmap-indic-maps---powered-by-mapzen-tangram" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Openstreetmap Indic Maps - Powered by <a href="https://github.com/Mapzen" class="user-mention">@Mapzen</a> <a href="https://github.com/Tangrams" class="user-mention">@Tangrams</a>
-</h1>
+	<!-- Keymaster handles keyboard input -->
+	<script src="lib/keymaster.js"></script>
 
-<ul>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/bengali.html">Bengali</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/gujarati.html">Gujarati</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/hindi.html">Hindi</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/kannada.html">Kannada</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/malayalam.html">Malayalam</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/marathi.html">Marathi</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/nepali.html">Nepali</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/odia.html">Odia</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/punjabi.html">Punjabi</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/tamil.html">Tamil</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/telugu.html">Telugu</a></li>
-<li><a href="http://srikanthlogic.github.io/tangrams-indic/Urdu.html">Urdu</a></li>
-</ul>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/srikanthlogic">srikanthlogic</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+	<!-- Main tangram library -->
+	<script src="https://mapzen.com/tangram/0.10/tangram.min.js"></script>
+
+	<!-- Demo module -->
+	<script src="main.js"></script>
+
+	<!-- Adding a script block to post message to the parent container (think iframed demos) -->
+	<script type="text/javascript">
+	  window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
+	</script>
+
+	<!-- Mapzen map UI -->
+	<script src='https://mapzen.com/common/ui/mapzen-ui.min.js'></script>
+	<script>
+	  MPZN.bug({
+	  link: '',
+	  tweet: '#sardinian maps powered by @mapzen and @openstreetmap #SaMapa',
+	  repo: 'https://github.com/sabas/tangrams-sardu'
+	});
+	</script>
   </body>
 </html>
